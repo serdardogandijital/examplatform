@@ -1,0 +1,19 @@
+{
+  "name": "Exam Platform",
+  "dockerComposeFile": "../docker-compose.dev.yml",
+  "service": "firebase-emulator",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "zsh"
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next"
+  ],
+  "forwardPorts": [3000, 5000, 4000, 8080, 9099, 9199],
+  "postCreateCommand": "npm install && husky install"
+}
+

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  firebase-emulator:
+    image: google/cloud-sdk:latest
+    command: >
+      bash -c "
+      apt-get update && apt-get install -y default-jre &&
+      npm install -g firebase-tools &&
+      firebase emulators:start --project=exam-platform-dev
+      "
+    ports:
+      - "4000:4000"
+      - "8080:8080"
+      - "9099:9099"
+      - "9199:9199"
+    volumes:
+      - ./firebase.json:/app/firebase.json
+      - ./firestore.rules:/app/firestore.rules
+      - ./firestore.indexes.json:/app/firestore.indexes.json
+      - ./storage.rules:/app/storage.rules
+    working_dir: /app
+
+networks:
+  default:
+    name: exam-platform-dev-network
+
