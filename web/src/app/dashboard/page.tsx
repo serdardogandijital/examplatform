@@ -9,8 +9,8 @@ import Link from 'next/link';
 export default function DashboardPage() {
   const { user, loading } = useAuthStore();
   const router = useRouter();
-  const [profile, setProfile] = useState<any>(null);
-  const [exams, setExams] = useState<any[]>([]);
+  const [profile, setProfile] = useState<{ examsTaken?: number; certificatesEarned?: number } | null>(null);
+  const [exams, setExams] = useState<Array<{ id: string; examTitle?: string; score?: number; passed?: boolean }>>([]);
 
   useEffect(() => {
     if (!loading && !user) {

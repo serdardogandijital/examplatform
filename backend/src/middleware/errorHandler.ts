@@ -8,7 +8,7 @@ export const errorHandler = (
   err: ApiError,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
@@ -22,7 +22,13 @@ export const errorHandler = (
   });
 };
 
-export const asyncHandler = (fn: Function) => (
+type AsyncRequestHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => Promise<void | Response>;
+
+export const asyncHandler = (fn: AsyncRequestHandler) => (
   req: Request,
   res: Response,
   next: NextFunction

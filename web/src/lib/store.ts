@@ -15,12 +15,27 @@ export const useAuthStore = create<AuthState>((set) => ({
   setLoading: (loading) => set({ loading }),
 }));
 
+interface Exam {
+  id: string;
+  title: string;
+  level: string;
+  type: string;
+  [key: string]: unknown;
+}
+
+interface ExamSession {
+  sessionId: string;
+  startTime: string;
+  endTime: string;
+  [key: string]: unknown;
+}
+
 interface ExamState {
-  currentExam: any;
-  currentSession: any;
+  currentExam: Exam | null;
+  currentSession: ExamSession | null;
   answers: Record<string, string>;
-  setCurrentExam: (exam: any) => void;
-  setCurrentSession: (session: any) => void;
+  setCurrentExam: (exam: Exam | null) => void;
+  setCurrentSession: (session: ExamSession | null) => void;
   setAnswer: (questionId: string, answer: string) => void;
   resetExam: () => void;
 }

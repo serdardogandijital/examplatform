@@ -25,7 +25,7 @@ export const updateProfile = asyncHandler(async (req: AuthRequest, res: Response
   const userId = req.user?.uid;
   const { firstName, lastName, phone, country } = req.body;
 
-  const updateData: any = {
+  const updateData: Record<string, string> = {
     updatedAt: new Date().toISOString()
   };
 

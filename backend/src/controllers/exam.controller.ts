@@ -4,7 +4,7 @@ import { asyncHandler } from '../middleware/errorHandler';
 import { AuthRequest } from '../middleware/auth';
 
 export const getExams = asyncHandler(async (req: AuthRequest, res: Response) => {
-  const { level, type, status } = req.query;
+  const { level, type } = req.query;
 
   let query = db.collection('exams').where('isActive', '==', true);
 
@@ -133,7 +133,7 @@ export const submitExam = asyncHandler(async (req: AuthRequest, res: Response) =
   const questions = examData?.questions || [];
 
   Object.keys(answers).forEach(questionId => {
-    const question = questions.find((q: any) => q.id === questionId);
+    const question = questions.find((q: { id: string; correctAnswer: string }) => q.id === questionId);
     if (question && question.correctAnswer === answers[questionId]) {
       correctAnswers++;
     }

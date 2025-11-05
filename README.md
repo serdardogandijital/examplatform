@@ -236,5 +236,5 @@ MIT License - Detaylar için `LICENSE` dosyasına bakın.
 ## 📞 İletişim
 
 - Email: info@exam-platform.com
-- GitHub: https://github.com/your-org/exam-platform
+- GitHub: https://github.com/serdardogandijital/examplatform
 

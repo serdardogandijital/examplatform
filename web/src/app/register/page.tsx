@@ -24,8 +24,9 @@ export default function RegisterPage() {
     try {
       await authAPI.register(formData);
       router.push('/login');
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Registration failed');
+    } catch (err) {
+      const error = err as { response?: { data?: { error?: string } } };
+      setError(error.response?.data?.error || 'Registration failed');
     } finally {
       setLoading(false);
     }

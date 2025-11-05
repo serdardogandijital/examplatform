@@ -33,22 +33,47 @@ apiClient.interceptors.response.use(
 export default apiClient;
 
 // API methods
+interface RegisterData {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  role?: string;
+}
+
+interface ExamFilters {
+  level?: string;
+  type?: string;
+}
+
+interface SubmitExamData {
+  sessionId: string;
+  answers: Record<string, string>;
+}
+
+interface UpdateProfileData {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  country?: string;
+}
+
 export const authAPI = {
-  register: (data: any) => apiClient.post('/auth/register', data),
+  register: (data: RegisterData) => apiClient.post('/auth/register', data),
   logout: () => apiClient.post('/auth/logout'),
 };
 
 export const examAPI = {
-  getExams: (params?: any) => apiClient.get('/exams', { params }),
+  getExams: (params?: ExamFilters) => apiClient.get('/exams', { params }),
   getExamById: (id: string) => apiClient.get(`/exams/${id}`),
   startExam: (id: string) => apiClient.post(`/exams/${id}/start`),
-  submitExam: (id: string, data: any) => apiClient.post(`/exams/${id}/submit`, data),
+  submitExam: (id: string, data: SubmitExamData) => apiClient.post(`/exams/${id}/submit`, data),
   getResults: (examId: string, userId: string) => apiClient.get(`/exams/${examId}/results/${userId}`),
 };
 
 export const userAPI = {
   getProfile: () => apiClient.get('/users/profile'),
-  updateProfile: (data: any) => apiClient.put('/users/profile', data),
+  updateProfile: (data: UpdateProfileData) => apiClient.put('/users/profile', data),
   getUserExams: () => apiClient.get('/users/exams'),
 };
 
